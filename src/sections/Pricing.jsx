@@ -2,9 +2,11 @@ import clsx from "clsx";
 import React, { useState } from "react";
 import { Element } from "react-scroll";
 import { plans } from "../constants";
+import { CountUp } from "react-countup";
 
 const Pricing = () => {
   const [monthly, setMonthly] = useState(false);
+
   return (
     <section>
       <Element name="pricing">
@@ -53,6 +55,49 @@ const Pricing = () => {
                   {index === 1 && (
                     <div className="g4 absolute h-330 left-0 right-0 top-0 z-1 rounded-tl-3xl rounded-tr-3xl" />
                   )}
+                  <div
+                    className={clsx(
+                      "absolute left-0 right-0 z-2 flex items-center justify-center",
+                      index === 1 ? "-top-6" : "-top6 xl:-top-11"
+                    )}
+                  >
+                    <img
+                      src={plan.logo}
+                      alt={plan.title}
+                      className={clsx(
+                        "object-contain drop-shadow-2xl",
+                        index === 1 ? "size-[120]" : "size-[88px]"
+                      )}
+                    />
+                  </div>
+                  <div
+                    className={clsx(
+                      "small-2 rounded-20 relative z-2 mx-auto mb-6 border-2 px-4 py-1.5 uppercase",
+                      index === 1 ? "border-p3 text-p3" : "border-p1 text-p1"
+                    )}
+                  >
+                    {plan.title}
+                  </div>
+                  <div className="relative z-2 flex items-center justify-center">
+                    <div
+                      className={clsx(
+                        "h-num flex items-start",
+                        index === 1 ? "text-p3" : "text-p4"
+                      )}
+                    >
+                      ${" "}
+                      <CountUp
+                        start={plan.priceMonthly}
+                        end={monthly ? plan.priceMonthly : plan.priceYearly}
+                        duration={0.4}
+                        useEasing={false}
+                        preserveValue
+                      />
+                    </div>
+                    <div className="small-1 relative top-3 ml-1 uppercase">
+                      /mo
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
