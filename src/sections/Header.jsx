@@ -6,12 +6,12 @@ const Header = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
-    const handleScrolled = () => {
+    const handleScroll = () => {
       setHasScrolled(window.scrollY > 32);
     };
-    window.addEventListener("scroll", handleScrolled);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScrolled);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
   const NavLink = ({ title }) => (
@@ -31,7 +31,7 @@ const Header = () => {
     <header
       className={clsx(
         "fixed top-0 left-0 z-50 w-full py-10 transition-all duration-500 max-lg:py-4",
-        hasScrolled && "py-2 bg-black-100 blackdrop-blur-[8px]"
+        hasScrolled && "py-2 bg-black-100 backdrop-blur-[8px]"
       )}
     >
       <div className="container flex h-14 items-center max-lg:px-5">
@@ -44,7 +44,7 @@ const Header = () => {
             isOpen ? "max-lg:opacity-100" : "max-lg:pointer-events-none"
           )}
         >
-          <div className="max-lg:relative max-lg:flex max-lg:flex-col max-lg:min-h-screen max-lg:p-6 max-6 max-lg:overflow-hidden sidebar-before max-md:px-4">
+          <div className="max-lg:relative max-lg:flex max-lg:flex-col max-lg:min-h-screen max-lg:p-6 max-lg:overflow-hidden sidebar-before max-md:px-4">
             <nav className="max-lg:relative max-lg:z-2 max-lg:my-auto">
               <ul className="flex max-lg:block max-lg:px-12">
                 <li className="nav-li">
@@ -77,7 +77,7 @@ const Header = () => {
                 </li>
               </ul>
             </nav>
-            <div className="lg:hidden block absolute top-1/2 left-0 w-[960px] h-[380px] translate-x-[-290px] translate-y-1/2 rotate-90">
+            <div className="lg:hidden block absolute top-1/2 left-0 w-[960px] h-[380px] translate-x-[-290px] -translate-y-1/2 rotate-90">
               <img
                 src="/images/bg-outlines.svg"
                 width={960}
@@ -99,7 +99,11 @@ const Header = () => {
           className="lg:hidden z-2 size-10 border-2 border-s4/25 rounded-full flex justify-center items-center"
           onClick={() => setIsOpen((prevState) => !prevState)}
         >
-          <img src={`/images/${isOpen ? "close" : "magic"}.svg`} alt="" />
+          <img
+            src={`/images/${isOpen ? "close" : "magic"}.svg`}
+            alt="magic"
+            className="size-1/2 object-contain"
+          />
         </button>
       </div>
     </header>
